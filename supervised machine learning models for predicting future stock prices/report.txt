@@ -1,0 +1,78 @@
+Stock Price Prediction Report
+Introduction
+This report presents the analysis and results of a project aimed at predicting the stock prices of Apple Inc. (AAPL) using various machine learning models. The project involved data acquisition, preprocessing, feature engineering, model training, and evaluation.
+
+Data Overview
+The dataset utilized for this analysis consisted of historical stock prices for AAPL, covering the period from January 1, 2024, to January 22, 2025. Key features included the opening price, closing price, high and low prices, trading volume, and several technical indicators such as moving averages and RSI.
+
+Data Cleaning and Preparation
+Initial exploration of the dataset revealed some missing values, which were addressed by removing affected rows. This step ensured the integrity of the data and facilitated accurate model training. Visualizations were generated to understand the distribution of closing prices and trading volumes, revealing that the data followed a typical stock price distribution.
+
+Key Findings from Data Exploration:
+The distribution of closing prices indicated a concentration around specific price ranges, with a few outliers.
+Trading volume displayed significant variability, suggesting varying investor interest over time.
+Feature Engineering
+To enhance the predictive power of the models, several features were engineered, including:
+
+Moving Averages: Calculated for 10, 20, and 40 days to identify trends and smooth out price data.
+Relative Strength Index (RSI): Used to gauge market conditions, indicating overbought or oversold statuses.
+MACD and Ichimoku Cloud: Technical indicators that provide insights into price momentum and trend direction.
+The addition of these features significantly enriched the dataset, providing deeper insights into price movements.
+
+Model Training and Evaluation
+Multiple machine learning models were evaluated for their predictive capabilities, including:
+
+Linear Regression
+Decision Tree Regressor
+Support Vector Regressor (SVM)
+Random Forest Regressor
+Each model was assessed based on performance metrics such as Mean Squared Error (MSE), Mean Absolute Error (MAE), and R² score.
+
+Results Summary
+The Random Forest Regressor emerged as the most effective model, showcasing the lowest MSE and highest R² score among the tested models. The performance of each model is summarized as follows:
+
+Linear Regression: Moderate performance, suitable for linear trends.
+Decision Tree Regressor: Good for capturing non-linear relationships but prone to overfitting.
+Support Vector Regressor: Effective for smaller datasets but less competitive in this case.
+Random Forest Regressor: Best performance, effectively balancing bias and variance.
+Visualization of Results
+Predictions from each model were visualized against actual closing prices, highlighting the accuracy of the Random Forest model. The plots demonstrated that this model closely followed actual price movements, providing a reliable forecasting tool.
+
+Conclusion
+The project successfully demonstrated the application of machine learning techniques for stock price prediction. The Random Forest Regressor proved to be the most effective model, yielding accurate predictions through careful feature engineering and model selection.
+
+Future Directions
+To enhance predictive accuracy further, future work could explore:
+
+Incorporating additional external factors such as economic indicators and market sentiment.
+Experimenting with advanced algorithms, including deep learning models like LSTMs.
+Implementing ensemble methods to combine predictions from multiple models for improved results.
+Overall, this analysis provides a solid foundation for future exploration in stock price prediction using machine learning techniques.
+
+In the last part of the project, we examine the outcome of the models for predicting Foolad Mobarake which is a company in Iran
+
+Summary of the Code
+The provided code implements a comprehensive analysis and modeling approach to predict stock prices for Mobarakeh Steel Company using historical data. The process begins with data loading and preprocessing, which includes cleaning column names, converting date formats, and handling missing values.
+
+Key steps in the analysis include:
+
+Exploratory Data Analysis (EDA): This step involves visualizing closing prices over time and calculating moving averages to identify trends. Additional technical indicators like the Relative Strength Index (RSI), Moving Average Convergence Divergence (MACD), and Ichimoku cloud are computed to enhance the feature set.
+Feature Engineering: The code calculates several features such as moving averages and technical indicators that provide insights into market behavior.
+Correlation Analysis: A correlation matrix is generated to identify relationships between features and the closing price, allowing the selection of significant features for modeling.
+Model Training and Evaluation: Four machine learning models—Linear Regression, Decision Tree Regressor, Support Vector Regressor (SVR), and Random Forest Regressor—are trained using the processed data. The models are evaluated using metrics such as Mean Squared Error (MSE), Mean Absolute Error (MAE), and R² score.
+Visualization of Predictions: The predictions from each model are plotted against the actual closing prices to visualize performance.
+Model Performance and Quality of Predictions
+The evaluation of model performance reveals distinct strengths and weaknesses:
+
+Linear Regression: This model provided a baseline performance. While it is simple and interpretable, it may not capture complex patterns in the data effectively, resulting in higher error metrics compared to more complex models.
+Decision Tree Regressor: This model performed reasonably well, capturing non-linear relationships in the data. However, it can be prone to overfitting, especially if not properly tuned.
+Support Vector Regressor (SVR): SVR showed moderate performance, effective for smaller datasets but less competitive in this scenario compared to tree-based models.
+Random Forest Regressor: This model emerged as the best performer, demonstrating the lowest MSE and highest R² score. Its ability to average multiple decision trees helps reduce overfitting and improve generalization.
+Quality of Predictions
+The quality of predictions can be analyzed through the following metrics:
+
+MSE and MAE: These metrics indicate the average squared errors and absolute errors of predictions, with lower values indicating better model performance. The Random Forest model consistently produced the lowest MSE and MAE.
+R² Score: This metric assesses the proportion of variance in the dependent variable (closing prices) explained by the independent variables (features). A higher R² score (close to 1) signifies a better fit of the model to the data.
+Conclusion
+
+Overall, the Random Forest Regressor provided the most accurate predictions among the models tested, reflecting its robustness in handling complex datasets. The visual comparison of predicted versus actual prices demonstrated that the model could effectively track price movements, indicating a high degree of reliability in its forecasts. Future improvements could involve hyperparameter tuning, the inclusion of additional features such as macroeconomic indicators, and the exploration of advanced algorithms like deep learning for potentially enhanced predictive power.
