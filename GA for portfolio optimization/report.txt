@@ -1,0 +1,78 @@
+# Portfolio Optimization Using DEAP: A Report
+
+## Introduction
+Portfolio optimization is a crucial aspect of financial management, aiming to maximize returns while minimizing risk. This report outlines a Python script that employs the DEAP (Distributed Evolutionary Algorithms in Python) framework to optimize a portfolio of fintech stocks. The stocks under consideration include Visa (V), Mastercard (MA), PayPal (PYPL), Square (SQ), Automatic Data Processing (ADP), Goldman Sachs (GS), Morgan Stanley (MS), and JPMorgan Chase (JPM).
+
+## Data Fetching
+The script begins by fetching historical stock price data for the specified fintech stocks using the `yfinance` library. The data is collected over a defined period (from January 1, 2020, to January 1, 2023). The adjusted closing prices are extracted to ensure that the returns account for stock splits and dividends.
+
+### Code Snippet:
+```python
+def fetch_data(symbols, start, end):
+    return yf.download(symbols, start=start, end=end)['Adj Close']
+```
+
+## Fitness Evaluation
+The fitness function evaluates the performance of a portfolio based on its expected return. The expected return is calculated using the formula:
+
+\[
+\text{Annualized Return} = \sum(\text{Mean Returns} \times \text{Weights}) \times 252
+\]
+
+Here, the daily returns of assets are averaged and multiplied by their respective weights in the portfolio. The result is then annualized by multiplying by 252 (the typical number of trading days in a year).
+
+### Code Snippet:
+```python
+def evaluate_portfolio(weights, returns):
+    weights = np.array(weights)  # Convert to NumPy array
+    return np.sum(returns.mean() * weights) * 252,  # Annualized return
+```
+
+## DEAP Setup
+The DEAP framework is set up to create individuals (portfolios) with random weights that sum to one. The `FitnessMax` is defined to maximize fitness, and the `Individual` class is created to represent portfolios. Various genetic algorithm components, such as selection, crossover, and mutation, are registered in the toolbox.
+
+### Code Snippet:
+```python
+creator.create("FitnessMax", base.Fitness, weights=(1.0,))
+creator.create("Individual", list, fitness=creator.FitnessMax)
+```
+
+## Optimization Loop
+The genetic algorithm runs for a specified number of generations. In each generation:
+1. Individuals (portfolios) are evaluated for their fitness.
+2. The best-performing portfolios are selected to create offspring.
+3. Crossover and mutation operations are applied to introduce variability.
+4. The population is updated with the new offspring.
+
+### Code Snippet:
+```python
+for gen in range(NGEN):
+    fitnesses = list(map(toolbox.evaluate, population))
+    ...
+    population[:] = offspring
+```
+
+## Output 
+At the end of the optimization process, the best portfolio weights are printed, indicating the optimal allocation for each stock. Additionally, a plot is generated to visualize the best fitness values over generations, showcasing the evolution of portfolio performance.
+
+### Example Output:
+```
+Generation 0: Best fitness = 0.2126
+...
+Best portfolio weights: [0.8625, 1.4261, -0.8410, -0.0292, 6.4206, -0.0947, -0.4476, -0.4884]
+```
+
+## Evaluation of Output
+The output reveals the best portfolio weights, where:
+- Positive weights indicate long positions (buying the stock).
+- Negative weights represent short positions (selling the stock).
+
+### Observations:
+1. **Weight Distribution**: The presence of significant positive and negative weights suggests a strategy that involves both buying and short selling. The weight of **6.4206** indicates a strong long position in one of the stocks, which could be a high-conviction bet.
+  
+2. **Fluctuations in Fitness**: The fitness values fluctuate across generations, reflecting the random nature of the genetic algorithm. The variations illustrate the exploration and exploitation balance, which is essential for finding an optimal solution.
+
+3. **Final Portfolio**: The final portfolio weights indicate a complex strategy that may involve considerable risk due to short positions. Investors should carefully consider their risk tolerance before implementing such strategies.
+
+## Conclusion
+The DEAP-based portfolio optimization script effectively demonstrates the application of evolutionary algorithms in finance. By leveraging historical stock data, it identifies an optimal allocation strategy aimed at maximizing expected returns. Future enhancements could include incorporating risk management metrics, such as volatility or drawdown, to create a more balanced portfolio.
